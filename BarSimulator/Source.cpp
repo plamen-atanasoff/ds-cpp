@@ -45,6 +45,7 @@ int main()
 	// Try to simulate the student bar system
 	try {
 		simulate_bar(std::cin, std::cout);
+        //simulate_bar(empty, output);
 	}
 	catch (const incorrect_simulation& e) {
 		std::cout << "Some of the simulation states are wrong or invalid: " << e.what() << "\n";
