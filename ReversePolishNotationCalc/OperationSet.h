@@ -3,6 +3,7 @@
 #include <istream>
 #include <cctype>
 #include <sstream>
+#include <cassert>
 
 #include "expression.h"
 
@@ -51,6 +52,8 @@ public:
             char ch;
             ss >> ch;
             Associativity associativity = ch == 'R' ? Associativity::RIGHT : Associativity::LEFT;
+            assert(symbol >= 'a');
+            assert(symbol <= 'z');
             operations[symbol - 'a'] = Operation{ symbol, operation, static_cast<unsigned short>(num), associativity };
             availableOperators[symbol] = true;
         }
@@ -59,6 +62,9 @@ public:
         if (!availableOperators[operation]) {
             throw incorrect_expression("There is no such operator!");
         }
-        return Operation(operations[tolower(operation) - 'a']);
+        char symbol = tolower(operation);
+        assert(operation >= 'a');
+        assert(operation <= 'z');
+        return operations[symbol - 'a'];
     }
 };
