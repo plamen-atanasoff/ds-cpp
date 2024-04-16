@@ -80,7 +80,7 @@ double evaluate(const char* expression, std::istream& ops) {
                 operations.pop();
 
                 if (operations.empty()) {
-                    throw incorrect_expression("There are more opening brackets than closing brackets!");
+                    throw incorrect_expression("There are more closing brackets than opening brackets!");
                 }
             }
 
@@ -107,7 +107,7 @@ double evaluate(const char* expression, std::istream& ops) {
                 continue;
             }
 
-            //if last operation in stack has higher priority, add all operations with higher priority
+            //if last operation in stack has higher priority, calculate all operations with higher priority
             while (lastOp.priority > currentOp.priority || (lastOp.priority == currentOp.priority
                 && lastOp.associativity == currentOp.associativity && lastOp.associativity == Associativity::LEFT)) {
                 calculate(numbers, allowedOperations.get(operations.top()).operation);
